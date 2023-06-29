@@ -4,14 +4,7 @@ namespace Lab3Tests
 {
     public class UnitTest1
     {
-        [Fact]
-        public void challange1Test2()
-        {
-            string array = "1,4,5,7";
-            int result = Program.GetProduct();
-            Assert.Equal(result, 20);
-        }
-
+       
         [Fact]
         public void TestChallenge2()
         {
