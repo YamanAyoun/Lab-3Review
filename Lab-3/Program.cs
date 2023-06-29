@@ -4,7 +4,10 @@
     {
         static void Main(string[] args)
         {
-            SaveTextInFile();
+
+            //SaveTextInFile();
+            Challenge8();
+            
         }
 
         public static int GetProduct()
@@ -37,7 +40,42 @@
             return product;
         }
 
-        public static int avarageNumber(string[] arr, int size)
+        public static void Challenge2()
+        {
+            Console.WriteLine("Please enter a number between 2-10:");
+            string userInput = Console.ReadLine();
+            int userInputInt;
+
+            try
+            {
+                userInputInt = Convert.ToInt32(userInput);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Thats not a number, Enter a number between 2-10:");
+                userInput = Console.ReadLine();
+                userInputInt = Convert.ToInt32(userInput);
+            }
+
+            int[] arr = new int[userInputInt];
+
+            for (int i = 0; i < userInputInt; i++)
+            {
+                Console.WriteLine($"{i + 1} of {userInputInt} - Enter a number:");
+                try
+                {
+                    arr[i] = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("You should Enter a Number");
+                }
+            }
+
+            Console.WriteLine("Avarage: " + avarageNumber(arr, userInputInt));
+        }
+
+        public static int avarageNumber(int[] arr, int size)
         {
 
             int[] num = new int[size];
@@ -105,8 +143,8 @@
         public static int numberMost(int[] arr)
         {
             int most = 0;
-            int maxDuplic = 0;
-
+            int maxDuplic = arr[0];
+            
             for (int i = 0; i < arr.Length; i++)
             {
                 int count = 0;
@@ -121,12 +159,28 @@
 
                 if (most < count)
                 {
-                    most = count;
                     maxDuplic = arr[i];
+                    most = count;
+                
                 }
+                
+
             }
 
             return maxDuplic;
+        }
+
+        public static int maximumValue(int[] arr)
+        {
+            int max = arr[0];
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (arr[i] > max)
+                {
+                    max = arr[i];
+                }
+            }
+            return max;
         }
 
         public static void SaveTextInFile()
@@ -147,6 +201,19 @@
 
 
             Console.WriteLine(fileData);
+        }
+
+        public static void Challenge8()
+        {
+            string path = "../../../words.txt";
+            string fileContent = File.ReadAllText(path);
+
+
+            File.WriteAllText(path, "");
+            Console.WriteLine("The new content is:");
+            string[] newfileContent = File.ReadAllLines(path);
+            for (int i = 0; i < newfileContent.Length; i++)
+                Console.WriteLine(newfileContent[i]);
         }
 
 
