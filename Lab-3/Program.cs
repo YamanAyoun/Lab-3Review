@@ -1,4 +1,6 @@
-﻿namespace Lab_3
+﻿using System.Diagnostics.Metrics;
+
+namespace Lab_3
 {
     public class Program
     {
@@ -6,8 +8,16 @@
         {
 
             //SaveTextInFile();
-            Challenge8();
+            //Challenge8();
+
+            string[] wordList = AnalyzeSentence();
+            foreach (string wordInfo in wordList)
+            {
+                Console.WriteLine(wordInfo);
+            }
             
+
+
         }
 
         public static int GetProduct()
@@ -16,23 +26,23 @@
             Console.WriteLine("Please enter 3 numbers: ");
             string input = Console.ReadLine();
             string[] numbers = input.Split(' ');
-
-            if (numbers.Length <= 2)
-            {
-                return 0;
-            }
+            
 
             int product = 1;
 
             for (int i = 0; i < 3; i++)
             {
-                if (int.TryParse(numbers[i], out int num))
+                if (numbers.Length < 3)
+                {
+                    product = 0;
+                }
+                else if (int.TryParse(numbers[i], out int num))
                 {
                     product *= num;
                 }
                 else
                 {
-                    product *= 1;
+                     product *= 1;
                 }
             }
 
@@ -214,7 +224,31 @@
             string[] newfileContent = File.ReadAllLines(path);
             for (int i = 0; i < newfileContent.Length; i++)
                 Console.WriteLine(newfileContent[i]);
+
         }
+
+        public static string[] AnalyzeSentence()
+        {
+            Console.WriteLine("Enter a sentence:");
+            string sentence = Console.ReadLine();
+
+            // Split the sentence into words by whitespace
+            string[] words = sentence.Split(' ');
+
+            // Create an array to store the word and its length
+            string[] wordLengths = new string[words.Length];
+
+            // Process each word and store the word and its length in the array
+            for (int i = 0; i < words.Length; i++)
+            {
+                string word = words[i];
+                int length = word.Length;
+                wordLengths[i] = $"{word}: {length}";
+            }
+
+            return wordLengths;
+        }
+
 
 
     }
